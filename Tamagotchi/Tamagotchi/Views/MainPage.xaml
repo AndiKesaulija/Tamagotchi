@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Tamagotchi.Views.MainPage"
+             >
+
+
+    <AbsoluteLayout>
+        <Frame WidthRequest="320" BackgroundColor="{StaticResource Background_Color}" Padding="24" CornerRadius="0">
+                <Label Text="Tamagotchi" HorizontalTextAlignment="Center" TextColor="{StaticResource Font_Color}" FontSize="36"/>
+        </Frame>
+
+
+        <Grid TranslationY="570" Padding="0" Margin="0"  RowSpacing="0" ColumnSpacing="0" RowDefinitions="80,0,*" ColumnDefinitions="*,*,*,*" BackgroundColor="{StaticResource Background_Color}">
+
+            <Button BorderColor="{StaticResource Background_Color}" Grid.Column="0" Text="Stats" Clicked="Push_Actions" ></Button>
+            <Button BorderColor="{StaticResource Background_Color}" Grid.Column="1" Text="Play" Clicked="Button_Clicked"></Button>
+            <Button BorderColor="{StaticResource Background_Color}" Grid.Column="2" Text="Feed" Clicked="Add_Hunger"></Button>
+            <Button BorderColor="{StaticResource Background_Color}" Grid.Column="3" Text="-Hunger" Clicked="Decrease_Hunger"></Button>
+
+        </Grid>
+
+    </AbsoluteLayout>
+
+</ContentPage>
