@@ -8,6 +8,24 @@
             <Color x:Key="Background_Color">#2a9d8f</Color>
             <Color x:Key="Font_Color">#e9c46a</Color>
 
+            <Style TargetType="NavigationPage">
+                <Setter Property="BarBackgroundColor" Value="#2a9d8f"></Setter>
+            </Style>
+
+            <Style TargetType="Label">
+                <Setter Property="TextColor" Value="#e9c46a"></Setter>
+            </Style>
+
+            <Style TargetType="Button">
+                <Setter Property="TextColor" Value="#e9c46a"></Setter>
+                <Setter Property="BorderColor" Value="#2a9d8f"></Setter>
+                <!--<Style.Triggers>
+                    <Trigger TargetType="Button" Property="IsPressed" Value="True">
+                        <Setter Property="TextColor" Value="red"></Setter>
+                    </Trigger>
+                </Style.Triggers>-->
+            </Style>
+
 
         </ResourceDictionary>
     </Application.Resources>

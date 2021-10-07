@@ -10,10 +10,11 @@ namespace Tamagotchi.Views
 {
     public partial class MainPage : ContentPage
     {
-
+        public string TextFromCode { get; set; }
         public int statHunger = 1000;
         public MainPage()
         {
+            BindingContext = this;
             InitializeComponent();
             Timer.Main();
             Timer.timeEvents += Decrease_Hunger;
@@ -33,6 +34,8 @@ namespace Tamagotchi.Views
         private void Add_Hunger(object sender, EventArgs e)
         {
             statHunger = 1000;
+            TextFromCode = statHunger.ToString();
+
             //Hunger.Text = statHunger.ToString();
 
             Console.WriteLine("Add_Hunger: " + statHunger);
@@ -41,6 +44,7 @@ namespace Tamagotchi.Views
         private void Decrease_Hunger(object sender, EventArgs e)
         {
             statHunger = statHunger - 10;
+            TextFromCode = statHunger.ToString();
             //Hunger.Text = statHunger.ToString();
 
             Console.WriteLine("Decrease_Hunger: " + statHunger);

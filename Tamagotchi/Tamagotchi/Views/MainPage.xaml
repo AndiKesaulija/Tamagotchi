@@ -7,9 +7,10 @@
 
     <AbsoluteLayout>
         <Frame WidthRequest="320" BackgroundColor="{StaticResource Background_Color}" Padding="24" CornerRadius="0">
-                <Label Text="Tamagotchi" HorizontalTextAlignment="Center" TextColor="{StaticResource Font_Color}" FontSize="36"/>
+            <Label Text="Tamagotchi" HorizontalTextAlignment="Center" TextColor="{StaticResource Font_Color}" FontSize="36"/>
         </Frame>
 
+        <Label Text="{Binding TextFromCode, Mode=OneWay}"></Label>
 
         <Grid TranslationY="570" Padding="0" Margin="0"  RowSpacing="0" ColumnSpacing="0" RowDefinitions="80,0,*" ColumnDefinitions="*,*,*,*" BackgroundColor="{StaticResource Background_Color}">
 
