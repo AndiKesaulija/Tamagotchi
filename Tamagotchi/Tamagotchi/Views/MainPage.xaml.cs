@@ -10,14 +10,20 @@ namespace Tamagotchi.Views
 {
     public partial class MainPage : ContentPage
     {
-        public string TextFromCode { get; set; }
-        public int statHunger = 1000;
+        public string statHunger { get; set; }
+        public string statHappyness { get; set; }
+        Creature myCreature = new Creature();
         public MainPage()
         {
+            var creatureDataStore = DependencyService.Get<IDataStore<Creature>>();
+
             BindingContext = this;
             InitializeComponent();
             Timer.Main();
+
             Timer.timeEvents += Decrease_Hunger;
+            Timer.timeEvents += Decrease_Happyness;
+
             //Hunger.Text = statHunger.ToString();
 
         }
@@ -33,21 +39,24 @@ namespace Tamagotchi.Views
 
         private void Add_Hunger(object sender, EventArgs e)
         {
-            statHunger = 1000;
-            TextFromCode = statHunger.ToString();
+            myCreature.hunger = 100;
+            statHappyness = myCreature.hunger.ToString();
 
-            //Hunger.Text = statHunger.ToString();
 
             Console.WriteLine("Add_Hunger: " + statHunger);
         }
 
         private void Decrease_Hunger(object sender, EventArgs e)
         {
-            statHunger = statHunger - 10;
-            TextFromCode = statHunger.ToString();
-            //Hunger.Text = statHunger.ToString();
-
-            Console.WriteLine("Decrease_Hunger: " + statHunger);
+            myCreature.hunger = myCreature.hunger - 10;
+            statHunger = myCreature.hunger.ToString();
+            //Console.WriteLine("Decrease_Hunger: " + statHunger);
+        }
+        private void Decrease_Happyness(object sender, EventArgs e)
+        {
+            myCreature.happyness = myCreature.happyness - 5;
+            statHappyness = myCreature.happyness.ToString();
+            //Console.WriteLine("Decrease_Hunger: " + statHunger);
         }
         private void Push_Actions(object sender, EventArgs e)
         {
