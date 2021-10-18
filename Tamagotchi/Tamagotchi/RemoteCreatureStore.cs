@@ -28,6 +28,11 @@ namespace Tamagotchi
 
                     Preferences.Set("CreatureID", creatureAsText);
 
+                    return true;
+                }
+                else
+                {
+                    return false;
                 }
 
             }
@@ -37,25 +42,43 @@ namespace Tamagotchi
                 return false;
 
             }
-            return Task.FromResult(true);
 
 
         }
 
 
 
-        public bool DeleteItem(Creature item)
+        public async Task<bool> DeleteItem(Creature item)
         {
             throw new NotImplementedException();
         }
 
+
         public async Task<Creature> ReadItem()
         {
-            int ceatureID = Preferences.Get("CreatureID", 0);
-            client.GetAsync("http://tamagotchi.hku.nl/app/Creatures/2");
+            int creatureID = Preferences.Get("MyCreatureID", 0);
+            if (creatureID == 0)
+            {
+                return null;
+            }
+
+            var response = await client.GetAsync("https://tamagotchi.hku.nl/api/Creatures/2");
+            if (response.IsSuccessStatusCode)
+            {
+                string creatureAsText = await response.Content.ReadAsStringAsync();
+
+                Creature creature = JsonConvert.DeserializeObject<Creature>(creatureAsText);
+
+                Preferences.Set("MyCreatureID", creature.ID);
+
+                return creature;
+            }
+
+            return null;
+
         }
 
-        public bool UpdateItem(Creature item)
+        public async Task<bool> UpdateItem(Creature item)
         {
             throw new NotImplementedException();
         }
