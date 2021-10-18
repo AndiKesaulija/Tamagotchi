@@ -9,39 +9,44 @@ namespace Tamagotchi
     public class LocalCreatureStore : IDataStore<Creature>
     {
 
-        public bool CreateItem(Creature item)
-        {
-            throw new NotImplementedException();
-            
-            //JsonConvert.SerializeObject(creature);
-            //Preferences.Set("Name", string)
-        }
+		public bool CreateItemAsync(Creature item)
+		{
+			string creatureAsText = JsonConvert.SerializeObject(item);
 
-        public bool DeleteItem(Creature item)
-        {
-            throw new NotImplementedException();
-            //Preferences.Remove()
+			Preferences.Set("MyCreature", creatureAsText);
 
-        }
+			return true;
+		}
 
-        public Creature ReadItem()
-        {
-            throw new NotImplementedException();
+		public bool DeleteItem(Creature item)
+		{
+			Preferences.Remove("MyCreature");
 
-            //Preferences.Get("Name", "")
+			return true;
+		}
 
-        }
+		public Creature ReadItem()
+		{
+			string creatureAsText = Preferences.Get("MyCreature", "");
 
-        public bool UpdateItem(Creature item)
-        {
-            if (Preferences.ContainsKey("MyCreature"))
-            {
-                string json = JsonConvert.SerializeObject(item);
-                //Preferences.Set("Name", string)
+			Creature creatureFromText = JsonConvert.DeserializeObject<Creature>(creatureAsText);
 
-            }
-            throw new NotImplementedException();
+			return creatureFromText;
+		}
 
-        }
-    }
+		public bool UpdateItem(Creature item)
+		{
+			if (Preferences.ContainsKey("MyCreature"))
+			{
+				string creatureAsText = JsonConvert.SerializeObject(item);
+
+				Preferences.Set("MyCreature", creatureAsText);
+
+				return true;
+			}
+
+			return false;
+		}
+	}
+
 }

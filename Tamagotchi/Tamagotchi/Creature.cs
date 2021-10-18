@@ -6,10 +6,14 @@ namespace Tamagotchi
 {
     public class Creature
     {
-        public float hunger = 100;
-        public float energy = 100;
-        public float happyness = 100;
+        public int ID { get; set; }
+        public string Name { get; set; }
+        public float Thirst { get; set; }
+        public float Hunger { get; set; }
 
-      
+
+
+
+
     }
 }
