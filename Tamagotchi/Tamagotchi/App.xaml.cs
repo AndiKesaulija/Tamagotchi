@@ -7,9 +7,10 @@ namespace Tamagotchi.Views
 {
     public partial class App : Application
     {
+        public static Creature myCreature { get; set; }
+       
         public App()
         {
-
             DependencyService.RegisterSingleton<IDataStore<Creature>>(new RemoteCreatureStore());
 
             InitializeComponent();
@@ -40,5 +41,7 @@ namespace Tamagotchi.Views
             Timer.SetTimer();
 
         }
+
+       
     }
 }

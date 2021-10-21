@@ -10,7 +10,6 @@ namespace Tamagotchi
 {
     class RemoteCreatureStore : IDataStore<Creature>
     {
-
         private HttpClient client = new HttpClient();
         public async Task<bool> CreateItem(Creature item)
         {
@@ -19,7 +18,7 @@ namespace Tamagotchi
             try
             {
 
-                var response = await client.PostAsync("https://tamagotchi.hku.nl/api/Creatures", new StringContent(creatureAsText, Encoding.UTF8, "aplication/json"));
+                var response = await client.PostAsync("https://tamagotchi.hku.nl/api/Creatures", new StringContent(creatureAsText, Encoding.UTF8, "application/json"));
 
                 if (response.IsSuccessStatusCode)
                 {
@@ -28,20 +27,16 @@ namespace Tamagotchi
                     Creature postedCreature = JsonConvert.DeserializeObject<Creature>(postedCeatureAsText);
 
                     Preferences.Set("MyCreatureID", postedCreature.id);
-                    Console.WriteLine("Creature Created");
+                    Console.WriteLine("[CREATURESTORE]: Creature Created");
                     return true;
                 }
-                else
-                {
-                    Console.WriteLine("Try FAILED");
-
-                    return false;
-                }
+                
+                return false;
 
             }
-            catch(Exception e)
+            catch (Exception e)
             {
-                Console.WriteLine("FAILED to Create Creature");
+                Console.WriteLine("[CREATURESTORE]: FAILED to Create Creature");
 
                 Console.WriteLine(e.Message);
                 return false;
@@ -105,10 +100,12 @@ namespace Tamagotchi
             }
             try
             {
-                var response = await client.PutAsync("https://tamagotchi.hku.nl/api/Creatures/" + creatureID, new StringContent(creatureAsText, Encoding.UTF8, "aplication/Json"));
+                var response = await client.PutAsync("https://tamagotchi.hku.nl/api/Creatures/" + creatureID, new StringContent(creatureAsText, Encoding.UTF8, "application/json"));
 
                 if (response.IsSuccessStatusCode)
                 {
+                    Console.WriteLine("[CREATURESTORE]: Update Creature");
+
                     return true;
                 }
                 else

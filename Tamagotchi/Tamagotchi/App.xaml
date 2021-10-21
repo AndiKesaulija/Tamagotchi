@@ -6,6 +6,7 @@
         <ResourceDictionary>
             <Color x:Key="Bar_Color">#264653</Color>
             <Color x:Key="Background_Color">#2a9d8f</Color>
+            <Color x:Key="Content_Color">#264653</Color>
             <Color x:Key="Font_Color">#e9c46a</Color>
 
             <Style TargetType="NavigationPage">

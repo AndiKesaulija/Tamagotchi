@@ -5,34 +5,46 @@
              >
 
     <ContentPage.Content>
-        <AbsoluteLayout>
+            <StackLayout>
+                <Frame BackgroundColor="{StaticResource Background_Color}">
+                    <Label Text="Tamagotchi" HorizontalTextAlignment="Center" TextColor="{StaticResource Font_Color}" FontSize="36"/>
+                </Frame>
 
-            
-            <Frame WidthRequest="320" BackgroundColor="{StaticResource Background_Color}" Padding="24" CornerRadius="0">
-                <Label Text="Tamagotchi" HorizontalTextAlignment="Center" TextColor="{StaticResource Font_Color}" FontSize="36"/>
-            </Frame>
+                <Grid RowDefinitions="20,20,20,20,20" ColumnDefinitions="80" BackgroundColor="{StaticResource Content_Color}" HeightRequest="{Binding contentHeight, Mode=OneWay}">
 
-            <Label Text="{Binding statHunger, Mode=OneWay}"></Label>
-            <Label TranslationY="20" Text="{Binding statHappyness, Mode=OneWay}"></Label>
-            <Label TranslationY="40" Text="{Binding width, Mode=OneWay}"></Label>
-            <Label TranslationY="60" Text="{Binding height, Mode=OneWay}"></Label>
-            
-            <ContentView TranslationY="120" BackgroundColor="{StaticResource Background_Color}" WidthRequest = "{Binding width, Mode=OneWay}" HeightRequest="{Binding contentHeight, Mode=OneWay}">
-                <Button WidthRequest="20" BorderColor="{StaticResource Background_Color}" Text="New Creature" Clicked="Create_New_Creature" IsVisible="{Binding hasCreature}" ></Button>
-                
+                    <Label Grid.Row="0" Grid.Column="0" Text="Hunger: "></Label>
+                    <Label Grid.Row="0" Grid.Column="1" Text="{Binding statHunger, Mode=OneWay}"></Label>
 
-            </ContentView>
-            
-            <Grid TranslationY="570" Padding="0" Margin="0"  RowSpacing="0" ColumnSpacing="0" RowDefinitions="80,0,*" ColumnDefinitions="*,*,*,*" BackgroundColor="{StaticResource Background_Color}">
+                    <Label Grid.Row="1" Grid.Column="0" Text="Thirst: "></Label>
+                    <Label Grid.Row="1" Grid.Column="1" Text="{Binding statThirst, Mode=OneWay}"></Label>
 
-                <Button BorderColor="{StaticResource Background_Color}" Grid.Column="0" Text="Stats" Clicked="Push_Actions" ></Button>
-                <Button BorderColor="{StaticResource Background_Color}" Grid.Column="1" Text="Play" Clicked="Button_Clicked"></Button>
-                <Button BorderColor="{StaticResource Background_Color}" Grid.Column="2" Text="Feed" Clicked="Add_Hunger"></Button>
-                <Button BorderColor="{StaticResource Background_Color}" Grid.Column="3" Text="-Hunger" Clicked="Decrease_Hunger"></Button>
+                    <Label Grid.Row="2" Grid.Column="0" Text="Boredom: "></Label>
+                    <Label Grid.Row="2" Grid.Column="1" Text="{Binding statBoredom, Mode=OneWay}"></Label>
+
+                    <Label Grid.Row="3" Grid.Column="0" Text="Loneliness: "></Label>
+                    <Label Grid.Row="3" Grid.Column="1" Text="{Binding statLoneliness, Mode=OneWay}"></Label>
+
+                    <Label Grid.Row="4" Grid.Column="0" Text="Stimulated: "></Label>
+                    <Label Grid.Row="4" Grid.Column="1" Text="{Binding statStimulated, Mode=OneWay}"></Label>
+
+                    <Label Grid.Row="5" Grid.Column="0" Text="Tired: "></Label>
+                    <Label Grid.Row="5" Grid.Column="1" Text="{Binding statTired, Mode=OneWay}"></Label>
+
+                </Grid>
+
+            <Grid TranslationY="30" RowDefinitions="80" ColumnDefinitions="*" ColumnSpacing="0" BackgroundColor="{StaticResource Background_Color}">
+
+                <Button BorderColor="{StaticResource Background_Color}" Grid.Column="0" Text="Actions" Clicked="Push_Actions" ></Button>
+                <Button BorderColor="{StaticResource Background_Color}" Grid.Column="1" Text="Stats" Clicked="Button_Clicked"></Button>
+                <Button BorderColor="{StaticResource Background_Color}" Grid.Column="2" Text="Settings" Clicked="Button_Clicked"></Button>
 
             </Grid>
 
-        </AbsoluteLayout>
+        </StackLayout>
+
+        
+
+
     </ContentPage.Content>
     
 

@@ -7,66 +7,66 @@ using System.Threading.Tasks;
 
 namespace Tamagotchi
 {
-    public class LocalCreatureStore : IDataStore<Creature>
+    public class LocalCreatureStore 
     {
-        public Task<bool> CreateItem(Creature item)
-        {
-            throw new NotImplementedException();
-        }
+  //      public Task<bool> CreateItem(Creature item)
+  //      {
+  //          throw new NotImplementedException();
+  //      }
 
-        public bool CreateItemAsync(Creature item)
-		{
-			string creatureAsText = JsonConvert.SerializeObject(item);
+  //      public bool CreateItemAsync(Creature item)
+		//{
+		//	string creatureAsText = JsonConvert.SerializeObject(item);
 
-			Preferences.Set("MyCreature", creatureAsText);
+		//	Preferences.Set("MyCreature", creatureAsText);
 
-			return true;
-		}
+		//	return true;
+		//}
 
-		public bool DeleteItem(Creature item)
-		{
-			Preferences.Remove("MyCreature");
+		//public bool DeleteItem(Creature item)
+		//{
+		//	Preferences.Remove("MyCreature");
 
-			return true;
-		}
+		//	return true;
+		//}
 
-		public Creature ReadItem()
-		{
-			string creatureAsText = Preferences.Get("MyCreature", "");
+		//public Creature ReadItem()
+		//{
+		//	string creatureAsText = Preferences.Get("MyCreature", "");
 
-			Creature creatureFromText = JsonConvert.DeserializeObject<Creature>(creatureAsText);
+		//	Creature creatureFromText = JsonConvert.DeserializeObject<Creature>(creatureAsText);
 
-			return creatureFromText;
-		}
+		//	return creatureFromText;
+		//}
 
-		public bool UpdateItem(Creature item)
-		{
-			if (Preferences.ContainsKey("MyCreature"))
-			{
-				string creatureAsText = JsonConvert.SerializeObject(item);
+		//public bool UpdateItem(Creature item)
+		//{
+		//	if (Preferences.ContainsKey("MyCreature"))
+		//	{
+		//		string creatureAsText = JsonConvert.SerializeObject(item);
 
-				Preferences.Set("MyCreature", creatureAsText);
+		//		Preferences.Set("MyCreature", creatureAsText);
 
-				return true;
-			}
+		//		return true;
+		//	}
 
-			return false;
-		}
+		//	return false;
+		//}
 
-        Task<bool> IDataStore<Creature>.DeleteItem(Creature item)
-        {
-            throw new NotImplementedException();
-        }
+  //      Task<bool> IDataStore<Creature>.DeleteItem(Creature item)
+  //      {
+  //          throw new NotImplementedException();
+  //      }
 
-        Task<Creature> IDataStore<Creature>.ReadItem()
-        {
-            throw new NotImplementedException();
-        }
+  //      Task<Creature> IDataStore<Creature>.ReadItem()
+  //      {
+  //          throw new NotImplementedException();
+  //      }
 
-        Task<bool> IDataStore<Creature>.UpdateItem(Creature item)
-        {
-            throw new NotImplementedException();
-        }
+  //      Task<bool> IDataStore<Creature>.UpdateItem(Creature item)
+  //      {
+  //          throw new NotImplementedException();
+  //      }
     }
 
 }

@@ -25,6 +25,7 @@ namespace Tamagotchi.Views
             Creature myCreature = new Creature();
 
             myCreature.userName = name.Text;
+            myCreature.name = name.Text;
             var creatureDataStore = DependencyService.Get<IDataStore<Creature>>();
             await creatureDataStore.CreateItem(myCreature);
             //Console.WriteLine("New Creature Created with name: " + myCreature.Name);
