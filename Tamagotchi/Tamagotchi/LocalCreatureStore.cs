@@ -3,13 +3,18 @@ using System.Collections.Generic;
 using System.Text;
 using Xamarin.Essentials;
 using Newtonsoft.Json;
+using System.Threading.Tasks;
 
 namespace Tamagotchi
 {
     public class LocalCreatureStore : IDataStore<Creature>
     {
+        public Task<bool> CreateItem(Creature item)
+        {
+            throw new NotImplementedException();
+        }
 
-		public bool CreateItemAsync(Creature item)
+        public bool CreateItemAsync(Creature item)
 		{
 			string creatureAsText = JsonConvert.SerializeObject(item);
 
@@ -47,6 +52,21 @@ namespace Tamagotchi
 
 			return false;
 		}
-	}
+
+        Task<bool> IDataStore<Creature>.DeleteItem(Creature item)
+        {
+            throw new NotImplementedException();
+        }
+
+        Task<Creature> IDataStore<Creature>.ReadItem()
+        {
+            throw new NotImplementedException();
+        }
+
+        Task<bool> IDataStore<Creature>.UpdateItem(Creature item)
+        {
+            throw new NotImplementedException();
+        }
+    }
 
 }

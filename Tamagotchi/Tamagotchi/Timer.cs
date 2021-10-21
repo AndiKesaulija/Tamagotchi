@@ -25,10 +25,10 @@ namespace Tamagotchi
             //aTimer.Dispose();
 
         }
-        private static void SetTimer()
+        public static void SetTimer()
         {
             
-            Console.WriteLine("Timer Started");
+            //Console.WriteLine("Timer Started");
             // Create a timer with a two second interval.
             aTimer = new System.Timers.Timer(2000);
             // Hook up the Elapsed event for the timer. 
@@ -36,12 +36,15 @@ namespace Tamagotchi
             aTimer.AutoReset = true;
             aTimer.Enabled = true;
         }
+        public static void StopTimer()
+        {
+            aTimer.Stop();
+        }
 
         private static void OnTimedEvent(Object source, ElapsedEventArgs e)
         {
             timeEvents(source, e);
-            Console.WriteLine("The Elapsed event was raised at {0:HH:mm:ss.fff}",
-                              e.SignalTime);
+            //Console.WriteLine("The Elapsed event was raised at {0:HH:mm:ss.fff}", e.SignalTime);
         }
 
         
