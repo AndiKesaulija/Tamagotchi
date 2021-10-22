@@ -84,13 +84,22 @@
     <AndroidResource Include="Resources\mipmap-xxxhdpi\launcher_foreground.png" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Resources\drawable\" />
+    <AndroidResource Include="Resources\drawable\Creature_Happy.jpg" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Tamagotchi\Tamagotchi.csproj">
       <Project>{C2CDDF4D-BFC3-48F8-AFB5-8CB8257C372A}</Project>
       <Name>Tamagotchi</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\TestPng.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\Creature_Nutural.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\Creature_Sad.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>

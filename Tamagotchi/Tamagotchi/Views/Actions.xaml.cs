@@ -13,22 +13,13 @@ namespace Tamagotchi.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class Actions : ContentPage
     {
-        public enum Stat
-        {
-            hunger,
-            thirst,
-            boredom,
-            loneliness,
-            stimulated,
-            tired,
-        }
         public Actions()
         {
             InitializeComponent();
         }
         private void Add_Thirst(object sender, EventArgs e)
         {
-            Add_Stat(Stat.thirst);
+            App.myCreature.ChangeStat(1, StatType.thirst, true);
 
             var creatureDataStore = DependencyService.Get<IDataStore<Creature>>();
             creatureDataStore.UpdateItem(App.myCreature);
@@ -37,7 +28,8 @@ namespace Tamagotchi.Views
         }
         private void Add_Hunger(object sender, EventArgs e)
         {
-            Add_Stat(Stat.hunger);
+            App.myCreature.ChangeStat(1, StatType.hunger, true);
+
 
             var creatureDataStore = DependencyService.Get<IDataStore<Creature>>();
             creatureDataStore.UpdateItem(App.myCreature);
@@ -46,7 +38,8 @@ namespace Tamagotchi.Views
         }
         private void Add_Boredom(object sender, EventArgs e)
         {
-            Add_Stat(Stat.boredom);
+            App.myCreature.ChangeStat(1, StatType.boredom, true);
+
 
             var creatureDataStore = DependencyService.Get<IDataStore<Creature>>();
             creatureDataStore.UpdateItem(App.myCreature);
@@ -55,7 +48,7 @@ namespace Tamagotchi.Views
         }
         private void Add_Stimulated(object sender, EventArgs e)
         {
-            Add_Stat(Stat.stimulated);
+            App.myCreature.ChangeStat(1, StatType.stimulated, true);
 
             var creatureDataStore = DependencyService.Get<IDataStore<Creature>>();
             creatureDataStore.UpdateItem(App.myCreature);
@@ -64,7 +57,7 @@ namespace Tamagotchi.Views
         }
         private void Add_Tired(object sender, EventArgs e)
         {
-            Add_Stat(Stat.tired);
+            App.myCreature.ChangeStat(1, StatType.tired, true);
 
             var creatureDataStore = DependencyService.Get<IDataStore<Creature>>();
             creatureDataStore.UpdateItem(App.myCreature);
@@ -74,44 +67,24 @@ namespace Tamagotchi.Views
 
         private void ResetCreature(object sender, EventArgs e)
         {
-            Add_Stat(Stat.hunger);
-            Add_Stat(Stat.thirst);
-            Add_Stat(Stat.boredom);
-            Add_Stat(Stat.loneliness);
-            Add_Stat(Stat.stimulated);
-            Add_Stat(Stat.tired);
+            Console.WriteLine(App.myCreature.myStatus);
+
+            App.myCreature.Reset();
+
+            //App.myCreature.ChangeStat(1, StatType.thirst, true);
+            //App.myCreature.ChangeStat(1, StatType.hunger, true);
+            //App.myCreature.ChangeStat(1, StatType.boredom, true);
+            //App.myCreature.ChangeStat(1, StatType.loneliness, true);
+            //App.myCreature.ChangeStat(1, StatType.tired, true);
+            //App.myCreature.ChangeStat(1, StatType.stimulated, true);
+
+
+            Console.WriteLine(App.myCreature.myStatus);
 
             var creatureDataStore = DependencyService.Get<IDataStore<Creature>>();
             creatureDataStore.UpdateItem(App.myCreature);
             Navigation.PopAsync();
 
-        }
-        private void Add_Stat(Stat statType)
-        {
-            if (App.myCreature != null)
-            {
-                switch (statType)
-                {
-                    case Stat.hunger:
-                        App.myCreature.hunger = 100;
-                        break;
-                    case Stat.thirst:
-                        App.myCreature.thirst = 100;
-                        break;
-                    case Stat.boredom:
-                        App.myCreature.boredom = 100;
-                        break;
-                    case Stat.loneliness:
-                        App.myCreature.loneliness = 100;
-                        break;
-                    case Stat.stimulated:
-                        App.myCreature.stimulated = 100;
-                        break;
-                    case Stat.tired:
-                        App.myCreature.tired = 100;
-                        break;
-                }
-            }
         }
         
         private void Create_New_Creature(object sender, EventArgs e)

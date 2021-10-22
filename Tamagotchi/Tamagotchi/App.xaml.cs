@@ -8,6 +8,7 @@ namespace Tamagotchi.Views
     public partial class App : Application
     {
         public static Creature myCreature { get; set; }
+        public static string NoImage = "TestPng.png";
        
         public App()
         {

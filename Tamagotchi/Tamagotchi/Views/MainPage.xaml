@@ -5,38 +5,49 @@
              >
 
     <ContentPage.Content>
-            <StackLayout>
-                <Frame BackgroundColor="{StaticResource Background_Color}">
-                    <Label Text="Tamagotchi" HorizontalTextAlignment="Center" TextColor="{StaticResource Font_Color}" FontSize="36"/>
-                </Frame>
+            <StackLayout Spacing="0">
+            <Frame BackgroundColor="{StaticResource Background_Color}">
+                <Label Text="Tamagotchi" HorizontalTextAlignment="Center" TextColor="{StaticResource Font_Color}" FontSize="36"/>
+            </Frame>
+            <Frame Padding="0" BorderColor="{StaticResource Content_Color}" BackgroundColor="{StaticResource Background_Color}">
+                <Label Text="{Binding creatureName}" HorizontalTextAlignment="Center" TextColor="{StaticResource Font_Color}" FontSize="28"/>
+            </Frame>
+            <ContentView>
+                <Grid RowDefinitions="200,50" ColumnDefinitions="180,*" ColumnSpacing="10" BackgroundColor="{StaticResource Background_Color}">
+                    <Grid Grid.Column="0" RowDefinitions="20,20,20,20,20" ColumnDefinitions="80" BackgroundColor="{StaticResource Content_Color}" HeightRequest="{Binding contentHeight, Mode=OneWay}">
 
-                <Grid RowDefinitions="20,20,20,20,20" ColumnDefinitions="80" BackgroundColor="{StaticResource Content_Color}" HeightRequest="{Binding contentHeight, Mode=OneWay}">
+                        <Label Grid.Row="0" Grid.Column="0" Text="Hunger: "></Label>
+                        <Label Grid.Row="0" Grid.Column="1" Text="{Binding statHunger, Mode=OneWay}"></Label>
 
-                    <Label Grid.Row="0" Grid.Column="0" Text="Hunger: "></Label>
-                    <Label Grid.Row="0" Grid.Column="1" Text="{Binding statHunger, Mode=OneWay}"></Label>
+                        <Label Grid.Row="1" Grid.Column="0" Text="Thirst: "></Label>
+                        <Label Grid.Row="1" Grid.Column="1" Text="{Binding statThirst, Mode=OneWay}"></Label>
 
-                    <Label Grid.Row="1" Grid.Column="0" Text="Thirst: "></Label>
-                    <Label Grid.Row="1" Grid.Column="1" Text="{Binding statThirst, Mode=OneWay}"></Label>
+                        <Label Grid.Row="2" Grid.Column="0" Text="Boredom: "></Label>
+                        <Label Grid.Row="2" Grid.Column="1" Text="{Binding statBoredom, Mode=OneWay}"></Label>
 
-                    <Label Grid.Row="2" Grid.Column="0" Text="Boredom: "></Label>
-                    <Label Grid.Row="2" Grid.Column="1" Text="{Binding statBoredom, Mode=OneWay}"></Label>
+                        <Label Grid.Row="3" Grid.Column="0" Text="Loneliness: "></Label>
+                        <Label Grid.Row="3" Grid.Column="1" Text="{Binding statLoneliness, Mode=OneWay}"></Label>
 
-                    <Label Grid.Row="3" Grid.Column="0" Text="Loneliness: "></Label>
-                    <Label Grid.Row="3" Grid.Column="1" Text="{Binding statLoneliness, Mode=OneWay}"></Label>
+                        <Label Grid.Row="4" Grid.Column="0" Text="Stimulated: "></Label>
+                        <Label Grid.Row="4" Grid.Column="1" Text="{Binding statStimulated, Mode=OneWay}"></Label>
 
-                    <Label Grid.Row="4" Grid.Column="0" Text="Stimulated: "></Label>
-                    <Label Grid.Row="4" Grid.Column="1" Text="{Binding statStimulated, Mode=OneWay}"></Label>
+                        <Label Grid.Row="5" Grid.Column="0" Text="Tired: "></Label>
+                        <Label Grid.Row="5" Grid.Column="1" Text="{Binding statTired, Mode=OneWay}"></Label>
 
-                    <Label Grid.Row="5" Grid.Column="0" Text="Tired: "></Label>
-                    <Label Grid.Row="5" Grid.Column="1" Text="{Binding statTired, Mode=OneWay}"></Label>
+                    </Grid>
+
+                    <Image Grid.Row="0" Grid.Column="1" Source="{Binding StatusImage}"></Image>
 
                 </Grid>
+            </ContentView>
+            
+                
 
-            <Grid TranslationY="30" RowDefinitions="80" ColumnDefinitions="*" ColumnSpacing="0" BackgroundColor="{StaticResource Background_Color}">
+            <Grid RowDefinitions="80" ColumnDefinitions="*" ColumnSpacing="0" BackgroundColor="{StaticResource Background_Color}">
 
                 <Button BorderColor="{StaticResource Background_Color}" Grid.Column="0" Text="Actions" Clicked="Push_Actions" ></Button>
-                <Button BorderColor="{StaticResource Background_Color}" Grid.Column="1" Text="Stats" Clicked="Button_Clicked"></Button>
-                <Button BorderColor="{StaticResource Background_Color}" Grid.Column="2" Text="Settings" Clicked="Button_Clicked"></Button>
+                <!--<Button BorderColor="{StaticResource Background_Color}" Grid.Column="1" Text="Stats" Clicked="Button_Clicked"></Button>-->
+                <Button BorderColor="{StaticResource Background_Color}" Grid.Column="1" Text="Settings" Clicked="Push_Actions"></Button>
 
             </Grid>
 

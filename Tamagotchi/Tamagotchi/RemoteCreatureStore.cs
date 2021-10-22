@@ -6,8 +6,10 @@ using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
 
-namespace Tamagotchi
+
+namespace Tamagotchi.Views
 {
+
     class RemoteCreatureStore : IDataStore<Creature>
     {
         private HttpClient client = new HttpClient();
