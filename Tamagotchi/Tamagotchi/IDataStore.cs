@@ -13,6 +13,8 @@ namespace Tamagotchi
         Task<bool> UpdateItem(T item);
         Task<bool> DeleteItem(T item);
 
+        Task<bool> GoToPlayground(T item);
+        Task<bool> LeavePlayground(T item);
 
     }
 }

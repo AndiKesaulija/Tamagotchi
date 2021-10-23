@@ -19,19 +19,11 @@ namespace Tamagotchi
         public static void Main()
         {
             SetTimer();
-
-
-            //aTimer.Stop();
-            //aTimer.Dispose();
-
         }
         public static void SetTimer()
         {
             
-            //Console.WriteLine("Timer Started");
-            // Create a timer with a two second interval.
             aTimer = new System.Timers.Timer(6000);
-            // Hook up the Elapsed event for the timer. 
             aTimer.Elapsed += OnTimedEvent;
             aTimer.AutoReset = true;
             aTimer.Enabled = true;
@@ -44,7 +36,6 @@ namespace Tamagotchi
         private static void OnTimedEvent(Object source, ElapsedEventArgs e)
         {
             timeEvents(source, e);
-            //Console.WriteLine("The Elapsed event was raised at {0:HH:mm:ss.fff}", e.SignalTime);
         }
 
         

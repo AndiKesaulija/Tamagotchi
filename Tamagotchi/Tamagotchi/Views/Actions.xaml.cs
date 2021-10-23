@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,86 +12,92 @@ namespace Tamagotchi.Views
 {
    
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class Actions : ContentPage
+    public partial class Actions : ContentPage, INotifyPropertyChanged
     {
-        public Actions()
+        public MainPage myMainPage;
+
+        public Actions(MainPage parent)
         {
+            BindingContext = parent;
             InitializeComponent();
+            myMainPage = parent;
         }
-        private void Add_Thirst(object sender, EventArgs e)
+
+        protected override async void OnDisappearing()
         {
-            App.myCreature.ChangeStat(1, StatType.thirst, true);
+            var creatureDataStore = DependencyService.Get<IDataStore<Creature>>();
+            await creatureDataStore.UpdateItem(myMainPage.myCreature);
+
+        }
+
+        private  void Add_Thirst(object sender, EventArgs e)
+        {
+            myMainPage.myCreature.ChangeStat(1, StatType.thirst, true);
 
             var creatureDataStore = DependencyService.Get<IDataStore<Creature>>();
-            creatureDataStore.UpdateItem(App.myCreature);
+            creatureDataStore.UpdateItem(myMainPage.myCreature);
             Navigation.PopAsync();
 
         }
-        private void Add_Hunger(object sender, EventArgs e)
+        private  void Add_Hunger(object sender, EventArgs e)
         {
-            App.myCreature.ChangeStat(1, StatType.hunger, true);
+            myMainPage.myCreature.ChangeStat(1, StatType.hunger, true);
 
 
             var creatureDataStore = DependencyService.Get<IDataStore<Creature>>();
-            creatureDataStore.UpdateItem(App.myCreature);
+            creatureDataStore.UpdateItem(myMainPage.myCreature);
             Navigation.PopAsync();
 
         }
         private void Add_Boredom(object sender, EventArgs e)
         {
-            App.myCreature.ChangeStat(1, StatType.boredom, true);
+            myMainPage.myCreature.ChangeStat(1, StatType.boredom, true);
 
 
             var creatureDataStore = DependencyService.Get<IDataStore<Creature>>();
-            creatureDataStore.UpdateItem(App.myCreature);
+            creatureDataStore.UpdateItem(myMainPage.myCreature);
             Navigation.PopAsync();
 
         }
         private void Add_Stimulated(object sender, EventArgs e)
         {
-            App.myCreature.ChangeStat(1, StatType.stimulated, true);
+            myMainPage.myCreature.ChangeStat(1, StatType.stimulated, true);
 
             var creatureDataStore = DependencyService.Get<IDataStore<Creature>>();
-            creatureDataStore.UpdateItem(App.myCreature);
+            creatureDataStore.UpdateItem(myMainPage.myCreature);
             Navigation.PopAsync();
 
         }
         private void Add_Tired(object sender, EventArgs e)
         {
-            App.myCreature.ChangeStat(1, StatType.tired, true);
+            myMainPage.myCreature.ChangeStat(1, StatType.tired, true);
 
             var creatureDataStore = DependencyService.Get<IDataStore<Creature>>();
-            creatureDataStore.UpdateItem(App.myCreature);
+            creatureDataStore.UpdateItem(myMainPage.myCreature);
             Navigation.PopAsync();
 
         }
 
-        private void ResetCreature(object sender, EventArgs e)
+        private void GoTo_Playground(object sender, EventArgs e)
         {
-            Console.WriteLine(App.myCreature.myStatus);
-
-            App.myCreature.Reset();
-
-            //App.myCreature.ChangeStat(1, StatType.thirst, true);
-            //App.myCreature.ChangeStat(1, StatType.hunger, true);
-            //App.myCreature.ChangeStat(1, StatType.boredom, true);
-            //App.myCreature.ChangeStat(1, StatType.loneliness, true);
-            //App.myCreature.ChangeStat(1, StatType.tired, true);
-            //App.myCreature.ChangeStat(1, StatType.stimulated, true);
-
-
-            Console.WriteLine(App.myCreature.myStatus);
+            myMainPage.atPlayGround = true;
+            myMainPage.invertedAtPlayGround = !myMainPage.atPlayGround;
 
             var creatureDataStore = DependencyService.Get<IDataStore<Creature>>();
-            creatureDataStore.UpdateItem(App.myCreature);
+            creatureDataStore.GoToPlayground(myMainPage.myCreature);
             Navigation.PopAsync();
-
         }
+        private void Leave_Playground(object sender, EventArgs e)
+        {
+            myMainPage.atPlayGround = false;
+            myMainPage.invertedAtPlayGround = !myMainPage.atPlayGround;
+
+
+            var creatureDataStore = DependencyService.Get<IDataStore<Creature>>();
+            creatureDataStore.LeavePlayground(myMainPage.myCreature);
+            Navigation.PopAsync();
+        }
+
         
-        private void Create_New_Creature(object sender, EventArgs e)
-        {
-            Navigation.PushAsync(new CreateNewCreature());
-
-        }
     }
 }

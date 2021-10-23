@@ -106,7 +106,40 @@ namespace Tamagotchi.Views
 
                 if (response.IsSuccessStatusCode)
                 {
-                    Console.WriteLine("[CREATURESTORE]: Update Creature");
+                    Console.WriteLine("[CREATURESTORE]: Update Creature" );
+
+                    return true;
+                }
+                else
+                {
+                    Console.WriteLine("[CREATURESTORE]: Update Creature FAILED - Creatire ID: " + creatureID);
+
+                    return false;
+                }
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return false;
+            }
+        }
+
+        public async Task<bool> GoToPlayground(Creature item)
+        {
+
+            int creatureID = Preferences.Get("MyCreatureID", 0);
+            if (creatureID == 0)
+            {
+                return false;
+            }
+            try
+            {
+                var response = await client.PostAsync("https://tamagotchi.hku.nl/api/Playground/" + creatureID, new StringContent(creatureID.ToString(), Encoding.UTF8, "text/plain"));
+
+                if (response.IsSuccessStatusCode)
+                {
+                    Console.WriteLine("[CREATURESTORE]: Go To PlayGround");
 
                     return true;
                 }
@@ -122,5 +155,37 @@ namespace Tamagotchi.Views
                 return false;
             }
         }
+
+        public async Task<bool> LeavePlayground(Creature item)
+        {
+
+            int creatureID = Preferences.Get("MyCreatureID", 0);
+            if (creatureID == 0)
+            {
+                return false;
+            }
+            try
+            {
+                var response = await client.DeleteAsync("https://tamagotchi.hku.nl/api/Playground/" + creatureID);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    Console.WriteLine("[CREATURESTORE]: Leave PlayGround");
+
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return false;
+            }
+        }
+
     }
 }

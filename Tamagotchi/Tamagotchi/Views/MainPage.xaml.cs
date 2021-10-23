@@ -6,94 +6,65 @@ using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
 using Xamarin.Forms;
+using System.Timers;
+
 
 namespace Tamagotchi.Views
 {
-    public partial class MainPage : ContentPage
+    public partial class MainPage : ContentPage, INotifyPropertyChanged
     {
-      
-        //Stats
-        public string statHunger { get; set; }
-        public string statThirst { get; set; }
-        public string statBoredom { get; set; }
-        public string statLoneliness { get; set; }
-        public string statStimulated { get; set; }
-        public string statTired { get; set; }
+        public Creature myCreature { get; set; }
 
-        public string StatusImage { get; set; }
-        public string creatureName { get; set; }
-
+        public bool atPlayGround { get; set; }
+        public bool invertedAtPlayGround { get; set; }
 
         public MainPage()
         {
             BindingContext = this;
             InitializeComponent();
             Timer.Main();
-
             Timer.timeEvents += Decrease_Stats;
-            Timer.timeEvents += UpdateUI;
 
+            atPlayGround = false;
+            invertedAtPlayGround = true;
         }
 
         protected override async void OnAppearing()
         {
             var creatureDataStore = DependencyService.Get<IDataStore<Creature>>();
-            App.myCreature = await creatureDataStore.ReadItem();
-
-            if(App.myCreature == null)
-            {
-                await Navigation.PushAsync(new CreateNewCreature());
-            }
-
-            UpdateUI(null, null);
-
+            myCreature = await creatureDataStore.ReadItem();
+           
         }
 
         protected override async void OnDisappearing()
         {
             var creatureDataStore = DependencyService.Get<IDataStore<Creature>>();
-            await creatureDataStore.UpdateItem(App.myCreature);
+            await creatureDataStore.UpdateItem(myCreature);
             
         }
         private void Decrease_Stats(object sender, EventArgs e)
         {
-            if (App.myCreature != null)
-            {
-                App.myCreature.ChangeStat(-0.1f, StatType.hunger);
-                App.myCreature.ChangeStat(-0.1f, StatType.thirst);
-                App.myCreature.ChangeStat(-0.1f, StatType.boredom);
-                App.myCreature.ChangeStat(-0.1f, StatType.loneliness);
-                App.myCreature.ChangeStat(-0.1f, StatType.stimulated);
-                App.myCreature.ChangeStat(-0.1f, StatType.tired);
-            }
+            myCreature.ChangeStat(-0.1f, StatType.hunger);
+            myCreature.ChangeStat(-0.1f, StatType.thirst);
+            myCreature.ChangeStat(-0.1f, StatType.boredom);
+            myCreature.ChangeStat(-0.1f, StatType.loneliness);
+            myCreature.ChangeStat(-0.1f, StatType.stimulated);
+            myCreature.ChangeStat(-0.1f, StatType.tired);
         }
         
-        private void UpdateUI(object sender, EventArgs e)
-        {
-            if (App.myCreature != null)
-            {
-                StatusImage = App.myCreature.myStatus;
-                //creatureName = App.myCreature.name;
-                creatureName = App.myCreature.userName;
-
-                statThirst = App.myCreature.thirst.ToString();
-                statHunger = App.myCreature.hunger.ToString();
-                statBoredom = App.myCreature.boredom.ToString();
-                statLoneliness = App.myCreature.loneliness.ToString();
-                statStimulated = App.myCreature.stimulated.ToString();
-                statTired = App.myCreature.tired.ToString();
-
-                Console.WriteLine(StatusImage);
-            }
-        }
+        
         private void Create_New_Creature(object sender, EventArgs e)
         {
             Navigation.PushAsync(new CreateNewCreature());
 
         }
-        private void Push_Actions(object sender, EventArgs e)
+        private async void Push_Actions(object sender, EventArgs e)
         {
-            Navigation.PushAsync(new Actions());
+            await Navigation.PushAsync(new Actions(this));
+        }
+        private async void Push_Settings(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new Settings(this));
         }
 
 

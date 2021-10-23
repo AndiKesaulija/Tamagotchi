@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Tamagotchi.Views.Settings">
+    <ContentPage.Content>
+        <StackLayout>
+            <Frame WidthRequest="320" BackgroundColor="{StaticResource Background_Color}"  CornerRadius="0">
+                <Label Text="Settings" HorizontalTextAlignment="Center" TextColor="{StaticResource Font_Color}" FontSize="36"/>
+            </Frame>
+            <Grid RowSpacing="0" ColumnSpacing="0" RowDefinitions="100,100" ColumnDefinitions="*"  BackgroundColor="{StaticResource Background_Color}">
+                <Button BorderColor="{StaticResource Background_Color}" Grid.Column="0" Grid.Row="0" Text="Reset Stats" Clicked="ResetCreature" ></Button>
+                <Button BorderColor="{StaticResource Background_Color}" Grid.Column="2" Grid.Row="0" Text="New Creature" Clicked="Create_New_Creature"></Button>
+
+            </Grid>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
