@@ -7,7 +7,11 @@ namespace Tamagotchi.Views
 {
     public partial class App : Application
     {
-       
+        public static double ScreenHeight { get; set; }
+        public static double ScreenWidth { get; set; }
+
+        public static TimeSpan timeAsleep;
+
         public App()
         {
             DependencyService.RegisterSingleton<IDataStore<Creature>>(new RemoteCreatureStore());
@@ -19,28 +23,28 @@ namespace Tamagotchi.Views
 
         protected override void OnStart()
         {
+
         }
 
         protected override void OnSleep()
         {
             var sleepTime = DateTime.Now;
             Preferences.Set("SleepTime", sleepTime);
-
-            Timer.StopTimer();
         }
 
         protected override void OnResume()
         {
-            //TODO: Calculate New Creature stats
             var sleepTime = Preferences.Get("SleepTime", DateTime.Now);
             var wakeTime = DateTime.Now;
 
-            TimeSpan timeAsleep = wakeTime - sleepTime;
+            timeAsleep = wakeTime - sleepTime;
 
-            Timer.SetTimer();
+            Timer.UpdateCreature(App.timeAsleep);
+
+
 
         }
 
-       
+
     }
 }

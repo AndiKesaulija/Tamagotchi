@@ -3,7 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Tamagotchi.Views.MainPage"
              >
-
     <ContentPage.Content>
             <StackLayout Spacing="0">
             <Frame BackgroundColor="{StaticResource Background_Color}">
@@ -12,52 +11,48 @@
             <Frame Padding="0" BorderColor="{StaticResource Content_Color}" BackgroundColor="{StaticResource Background_Color}">
                 <Label Text="{Binding myCreature.name}" HorizontalTextAlignment="Center" TextColor="{StaticResource Font_Color}" FontSize="28"/>
             </Frame>
-            <ContentView>
-                <Grid RowDefinitions="200,50" ColumnDefinitions="*,*" ColumnSpacing="10" BackgroundColor="{StaticResource Content_Color}">
-                    <Grid Grid.Column="0" RowDefinitions="20,20,20,20,20" ColumnDefinitions="*" BackgroundColor="{StaticResource Content_Color}">
+            <AbsoluteLayout>
+                <Image Source="{Binding myCreature.myStatus}"></Image>
+                <Image Source="{Binding myCreature.statusPlayGround}" IsVisible="{Binding atPlayGround}"></Image>
+                <Image Source="{Binding myCreature.myStatus}" IsVisible="{Binding myCreature.isAlive, Converter={StaticResource Converter}}"></Image>
 
-                        <Label Grid.Row="0" Grid.Column="0" Text="Hunger: "></Label>
-                        <Label Grid.Row="0" Grid.Column="1" Text="{Binding myCreature.hunger, Mode=OneWay}"></Label>
+                <Grid TranslationX="20" TranslationY="30" Grid.Column="0" RowDefinitions="20,20,20,20,20" ColumnDefinitions="73">
+                    <Label Grid.Row="0" Grid.Column="0" Text="Hunger: "></Label>
+                    <Label Grid.Row="0" Grid.Column="1" Text="{Binding myCreature.hunger, Mode=OneWay}"></Label>
 
-                        <Label Grid.Row="1" Grid.Column="0" Text="Thirst: "></Label>
-                        <Label Grid.Row="1" Grid.Column="1" Text="{Binding myCreature.thirst, Mode=OneWay}"></Label>
+                    <Label Grid.Row="1" Grid.Column="0" Text="Thirst: "></Label>
+                    <Label Grid.Row="1" Grid.Column="1" Text="{Binding myCreature.thirst, Mode=OneWay}"></Label>
 
-                        <Label Grid.Row="2" Grid.Column="0" Text="Boredom: "></Label>
-                        <Label Grid.Row="2" Grid.Column="1" Text="{Binding myCreature.boredom, Mode=OneWay}"></Label>
+                    <Label Grid.Row="2" Grid.Column="0" Text="Boredom: "></Label>
+                    <Label Grid.Row="2" Grid.Column="1" Text="{Binding myCreature.boredom, Mode=OneWay}"></Label>
 
-                        <Label Grid.Row="3" Grid.Column="0" Text="Loneliness: "></Label>
-                        <Label Grid.Row="3" Grid.Column="1" Text="{Binding myCreature.loneliness, Mode=OneWay}"></Label>
+                    <Label Grid.Row="3" Grid.Column="0" Text="Loneliness: "></Label>
+                    <Label Grid.Row="3" Grid.Column="1" Text="{Binding myCreature.loneliness, Mode=OneWay}"></Label>
 
-                        <Label Grid.Row="4" Grid.Column="0" Text="Stimulated: "></Label>
-                        <Label Grid.Row="4" Grid.Column="1" Text="{Binding myCreature.stimulated, Mode=OneWay}"></Label>
+                    <Label Grid.Row="4" Grid.Column="0" Text="Stimulated: "></Label>
+                    <Label Grid.Row="4" Grid.Column="1" Text="{Binding myCreature.stimulated, Mode=OneWay}"></Label>
 
-                        <Label Grid.Row="5" Grid.Column="0" Text="Tired: "></Label>
-                        <Label Grid.Row="5" Grid.Column="1" Text="{Binding myCreature.tired, Mode=OneWay}"></Label>
-
-                        <!--<Label Grid.Row="6" Grid.Column="0" Text="Alive Status: "></Label>
-                        <Label Grid.Row="6" Grid.Column="1" Text="{Binding myCreature.isAlive, Mode=OneWay}"></Label>-->
-
-                    </Grid>
-
-                    <Image Grid.Row="0" Grid.Column="1" Source="{Binding myCreature.myStatus}" Aspect="AspectFit" ></Image>
-                    <Button Grid.Row="1" Grid.Column="1" Text="Create new Creature" Font="11" BorderWidth="2" BorderColor="{StaticResource Font_Color}" Clicked="Create_New_Creature"></Button>
+                    <Label Grid.Row="5" Grid.Column="0" Text="Tired: "></Label>
+                    <Label Grid.Row="5" Grid.Column="1" Text="{Binding myCreature.tired, Mode=OneWay}"></Label>
 
                 </Grid>
-            </ContentView>
-            
+
+                    <Label TranslationX="207" TranslationY="90" Grid.Row="0" Grid.Column="1" Text="{Binding myCreature.name}" IsVisible="{Binding myCreature.isAlive, Converter={StaticResource Converter}}" FontSize="11" TextColor="{StaticResource Font_Color2}" HorizontalTextAlignment="Center"></Label>
+                    <Label TranslationX="215" TranslationY="110" Grid.Row="0" Grid.Column="1" Text="{Binding myCreature.startTime}" IsVisible="{Binding myCreature.isAlive, Converter={StaticResource Converter}}" FontSize="10" TextColor="{StaticResource Font_Color2}" HorizontalTextAlignment="Center"></Label>
+                    <Label TranslationX="215" TranslationY="125" Grid.Row="0" Grid.Column="1" Text="{Binding myCreature.endTime}" IsVisible="{Binding myCreature.isAlive, Converter={StaticResource Converter}}" FontSize="10" TextColor="{StaticResource Font_Color2}" HorizontalTextAlignment="Center"></Label>
+
                 
+                <StackLayout TranslationY="410">
+                    
+                    <Grid RowDefinitions="*" ColumnDefinitions="*" ColumnSpacing="0">
+                        <Button Grid.Row="0" Text="Create new Creature" Font="11" BorderWidth="2" BorderColor="{StaticResource Font_Color}" Clicked="Create_New_Creature" IsVisible="{Binding myCreature.isAlive, Converter={StaticResource Converter}}" ></Button>
+                        <Button Grid.Row="1" Grid.Column="0" Text="Actions" BorderWidth="2" BorderColor="{StaticResource Font_Color}" Clicked="Push_Actions" IsEnabled="{Binding myCreature.isAlive}"></Button>
+                        <Button Grid.Row="1" Grid.Column="1" Text="Settings" BorderWidth="2" BorderColor="{StaticResource Font_Color}" Clicked="Push_Settings"></Button>
 
-            <Grid RowDefinitions="80" ColumnDefinitions="*" ColumnSpacing="0" BackgroundColor="{StaticResource Background_Color}">
-
-                <Button Grid.Column="0" Text="Actions" BorderWidth="2" BorderColor="{StaticResource Font_Color}" Clicked="Push_Actions" IsEnabled="{Binding myCreature.isAlive}"></Button>
-                <Button Grid.Column="1" Text="Settings" BorderWidth="2" BorderColor="{StaticResource Font_Color}" Clicked="Push_Settings"></Button>
-
-            </Grid>
-
+                    </Grid>
+                </StackLayout>
+            </AbsoluteLayout>
         </StackLayout>
-
-        
-
 
     </ContentPage.Content>
     

@@ -1,7 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Application xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Tamagotchi.Views.App">
+             x:Class="Tamagotchi.Views.App"
+             xmlns:local="clr-namespace:Tamagotchi"
+             >
     <Application.Resources>
         
         <ResourceDictionary>
@@ -9,14 +11,16 @@
             <Color x:Key="Background_Color">#2a9d8f</Color>
             <Color x:Key="Content_Color">#264653</Color>
             <Color x:Key="Font_Color">#e9c46a</Color>
+            <Color x:Key="Font_Color2">#424242</Color>
 
+            <local:NegateBooleanConverter x:Key="Converter"/>
 
             <Style TargetType="NavigationPage">
                 <Setter Property="BarBackgroundColor" Value="#2a9d8f"></Setter>
             </Style>
 
             <Style TargetType="Label">
-                <Setter Property="TextColor" Value="#e9c46a"></Setter>
+                <Setter Property="TextColor" Value="#000000"></Setter>
             </Style>
 
             <Style TargetType="Button">

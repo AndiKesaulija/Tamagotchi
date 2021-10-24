@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
 using System.Threading.Tasks;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace Tamagotchi
@@ -20,8 +21,9 @@ namespace Tamagotchi
     public class Creature : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
-
         public int id { get; set; }
+        public string startTime { get { return Preferences.Get("startTime", "null"); }}
+        public string endTime { get; set; }
         public string name { get; set; }
         public string userName { get; set; }
         public float thirst { get; set; }
@@ -34,11 +36,12 @@ namespace Tamagotchi
 
         public float status => (thirst + hunger + boredom + loneliness + stimulated + tired) * 0.16f;
 
-        public string statusHappy = "Creature_Happy.jpg";
-        public string statusNutural = "Creature_Nutural.jpg";
-        public string statusSad = "Creature_Sad.jpg";
-        public string statusDead = "Creature_Dead.jpg";
-        public string errorImg = "TestPng.png";
+        public string statusPlayGround => "Content_Background_PlayGround.jpg";
+
+        public string statusHappy = "Content_Background_Happy.jpg";
+        public string statusNutural = "Content_Background_Nutural.jpg";
+        public string statusSad = "Content_Background_Sad.jpg";
+        public string statusDead = "Content_Background_Dead.jpg";
 
         public string myStatus => status switch
         {
@@ -49,9 +52,26 @@ namespace Tamagotchi
             _ => statusDead
         };
 
-        public bool isAlive { get { return status >= 0.2f; } }
+        public bool atPlayGround { get; set; }
+        public bool isAlive
+        {
+            get
+            {
+                if(status <= 0.2f)
+                {
+                    endTime = DateTime.Now.ToShortDateString();
+                    return false;
+                }
+                    return true;
 
-        public void ChangeStat(float amount, StatType type, bool increase = false, bool force = false)
+            }
+            set
+            {
+
+            }
+        }
+
+        public void ChangeStat(float amount, StatType type, bool increase = false)
         {
             if (isAlive)
             {

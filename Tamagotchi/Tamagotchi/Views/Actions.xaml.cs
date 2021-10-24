@@ -77,11 +77,12 @@ namespace Tamagotchi.Views
             Navigation.PopAsync();
 
         }
-
+    
         private void GoTo_Playground(object sender, EventArgs e)
         {
             myMainPage.atPlayGround = true;
-            myMainPage.invertedAtPlayGround = !myMainPage.atPlayGround;
+
+            Timer.timeEvents += myMainPage.AtPlayground;
 
             var creatureDataStore = DependencyService.Get<IDataStore<Creature>>();
             creatureDataStore.GoToPlayground(myMainPage.myCreature);
@@ -90,7 +91,8 @@ namespace Tamagotchi.Views
         private void Leave_Playground(object sender, EventArgs e)
         {
             myMainPage.atPlayGround = false;
-            myMainPage.invertedAtPlayGround = !myMainPage.atPlayGround;
+
+            Timer.timeEvents -= myMainPage.AtPlayground;
 
 
             var creatureDataStore = DependencyService.Get<IDataStore<Creature>>();

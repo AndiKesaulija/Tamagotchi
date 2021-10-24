@@ -35,6 +35,9 @@ namespace Tamagotchi.Views
                 tired =1
             };
 
+            //Set startTime 
+            Preferences.Set("startTime", DateTime.Now.ToShortDateString());
+
             var creatureDataStore = DependencyService.Get<IDataStore<Creature>>();
 
             if(Preferences.Get("MyCreatureID", 0) != 0)

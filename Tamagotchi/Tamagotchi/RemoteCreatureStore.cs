@@ -87,6 +87,8 @@ namespace Tamagotchi.Views
                 return creature;
             }
 
+            Console.WriteLine("[CREATURESTORE] FAILED to ReadItem");
+            Preferences.Set("MyCreatureID", 0);
             return null;
 
         }
@@ -107,7 +109,6 @@ namespace Tamagotchi.Views
                 if (response.IsSuccessStatusCode)
                 {
                     Console.WriteLine("[CREATURESTORE]: Update Creature" );
-
                     return true;
                 }
                 else
